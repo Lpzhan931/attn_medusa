@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Large dataset
+perfectblend_qwen3-8b_regen_20k.json
+
+# Output directory
+output/
+
+# Optional
+*.log
+.env
