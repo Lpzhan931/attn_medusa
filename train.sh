@@ -6,8 +6,9 @@
 
 BASE_MODEL="/home/share/models/Qwen3-8B/"
 DATASET="./perfectblend_qwen3-8b_regen_20k.json"
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LR=5e-4
+
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 OUTPUT_DIR="output/output_qwen3_8b_${TIMESTAMP}_lr_${LR}"
 
 CUDA_VISIBLE_DEVICES=0 torchrun --master_port=29509 \
