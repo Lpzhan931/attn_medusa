@@ -3,6 +3,7 @@ import copy
 import torch
 import torch.nn as nn
 from transformers import PretrainedConfig, AutoModelForCausalLM, AutoTokenizer
+from transformers.models.qwen3.modeling_qwen3 import Qwen3DecoderLayer
 from huggingface_hub import hf_hub_download
 from train_settings import Config
 
@@ -53,11 +54,12 @@ class AttnMedusaModel(nn.Module):
         except:
             self.tokenizer = None
 
-        if hasattr(self.base_model.model, 'layers'):
-            self.decoder_layer = copy.deepcopy(self.base_model.model.layers[-1])
-        else:
-            raise ValueError("Base Model does not have '.model.layers'. Check model arch.")
-        
+        # if hasattr(self.base_model.model, 'layers'):
+        #     self.decoder_layer = copy.deepcopy(self.base_model.model.layers[-1])      # 一定不要这么初始化
+        # else:
+        #     raise ValueError("Base Model does not have '.model.layers'. Check model arch.")
+
+        self.decoder_layer = Qwen3DecoderLayer(self.config, layer_idx=0)        
         for param in self.decoder_layer.parameters():
             param.requires_grad = True
 
